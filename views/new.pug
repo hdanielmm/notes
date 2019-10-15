@@ -1,0 +1,22 @@
+extends index
+
+block body
+  div(class="note-form-page")
+    form(action="/notes", method="post")
+      div
+        input(type="text", id="title" name="title", placeholder="Your title here", autocomplete="off" autofocus)
+      div
+        textarea(id="body", name="body", rows="8", placeholder="Your text here...")
+      
+      div(class="form-actions")
+        a(href="/", class="btn") Cancel
+        button(type="submit", class="btn btn-primary") Create Note
+  
+  script.
+    var textarea = document.getElementById("body");
+    var heightLimit = 1000; /* Maximum height: 1000px*/
+
+    textarea.oninput =function() {
+      textarea.style.height = ""; /* Reset the height*/
+      textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
+    };
